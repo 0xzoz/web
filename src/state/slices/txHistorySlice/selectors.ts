@@ -154,7 +154,7 @@ export const selectTxsByFilter = createDeepEqualOutputSelector(
 )
 
 // this is only used on trade confirm - new txs will be pushed
-// to the end of this array, so last is guaranteed to be latest
+// to the beginning of this array, so last is guaranteed to be latest
 // this can return undefined as we may be trading into this asset
 // for the first time
 export const selectLatestTxStatusByAssetId = createSelector(
