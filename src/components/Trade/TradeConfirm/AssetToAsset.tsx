@@ -53,13 +53,13 @@ export const AssetToAsset = ({
           <CloseIcon p={1} />
         </Circle>
       )
-
     if (status === chainAdapters.TxStatus.Pending)
       return (
         <Circle bg={gray} size='100%'>
           <Spinner />
         </Circle>
       )
+
     return (
       <Circle bg={gray} size='100%'>
         <ArrowForwardIcon />
