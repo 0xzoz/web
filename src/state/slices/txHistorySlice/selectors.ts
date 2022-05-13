@@ -1,6 +1,6 @@
 import { AssetId } from '@shapeshiftoss/caip'
+import head from 'lodash/head'
 import intersection from 'lodash/intersection'
-import last from 'lodash/last'
 import createCachedSelector from 're-reselect'
 import { createSelector } from 'reselect'
 import { ReduxState } from 'state/reducer'
@@ -157,10 +157,10 @@ export const selectTxsByFilter = createDeepEqualOutputSelector(
 // to the end of this array, so last is guaranteed to be latest
 // this can return undefined as we may be trading into this asset
 // for the first time
-export const selectLastTxStatusByAssetId = createSelector(
+export const selectLatestTxStatusByAssetId = createSelector(
   selectTxIdsByAssetId,
   selectTxs,
-  (txIdsByAssetId, txs): Tx['status'] | undefined => txs[last(txIdsByAssetId) ?? '']?.status,
+  (txIdsByAssetId, txs): Tx['status'] | undefined => txs[head(txIdsByAssetId) ?? '']?.status,
 )
 
 const selectRebasesById = (state: ReduxState) => state.txHistory.rebases.byId

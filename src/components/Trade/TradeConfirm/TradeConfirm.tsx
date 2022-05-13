@@ -16,7 +16,7 @@ import { useLocaleFormatter } from 'hooks/useLocaleFormatter/useLocaleFormatter'
 import { useWallet } from 'hooks/useWallet/useWallet'
 import { bnOrZero } from 'lib/bignumber/bignumber'
 import { firstNonZeroDecimal, fromBaseUnit } from 'lib/math'
-import { selectLastTxStatusByAssetId } from 'state/slices/selectors'
+import { selectLatestTxStatusByAssetId } from 'state/slices/selectors'
 import { useAppSelector } from 'state/store'
 import { ValueOf } from 'types/object'
 
@@ -58,7 +58,7 @@ export const TradeConfirm = ({ history }: RouterProps) => {
     : { assetNamespace: AssetNamespace.Slip44, assetReference: AssetReference.Ethereum }
   const caip = toCAIP19({ chain, network, ...extra })
 
-  const status = useAppSelector(state => selectLastTxStatusByAssetId(state, caip))
+  const status = useAppSelector(state => selectLatestTxStatusByAssetId(state, caip))
 
   // Parametrized errors cannot simply be matched with === since their param(s) might vary
   const PARAMETRIZED_ERRORS_TO_TRADE_ERRORS = {
