@@ -342,6 +342,33 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }): JSX
               }
               dispatch({ type: WalletActions.SET_LOCAL_WALLET_LOADING, payload: false })
               break
+            case KeyManager.Tally:
+              const localTallyWallet = await state.adapters
+                .get(KeyManager.Tally)
+                ?.pairDevice()
+              if (localTallyWallet) {
+                const { name, icon } = SUPPORTED_WALLETS[KeyManager.Tally]
+                try {
+                  await localTallyWallet.initialize()
+                  const deviceId = await localTallyWallet.getDeviceID()
+                  dispatch({
+                    type: WalletActions.SET_WALLET,
+                    payload: {
+                      wallet: localTallyWallet,
+                      name,
+                      icon,
+                      deviceId
+                    }
+                  })
+                  dispatch({ type: WalletActions.SET_IS_CONNECTED, payload: true })
+                } catch (e) {
+                  disconnect()
+                }
+              } else {
+                disconnect()
+              }
+              dispatch({ type: WalletActions.SET_LOCAL_WALLET_LOADING, payload: false })
+              break
             default:
               disconnect()
               break

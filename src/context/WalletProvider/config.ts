@@ -11,6 +11,10 @@ import { MetaMaskConnect } from './MetaMask/components/Connect'
 import { MetaMaskFailure } from './MetaMask/components/Failure'
 import { MetaMaskSuccess } from './MetaMask/components/Success'
 import { MetaMaskConfig } from './MetaMask/config'
+import { TallyConnect } from './Tally/components/Connect'
+import { TallyFailure } from './Tally/components/Failure'
+import { TallySuccess } from './Tally/components/Success'
+import { TallyConfig } from './Tally/config'
 import { EnterPassword } from './NativeWallet/components/EnterPassword'
 import { NativeCreate } from './NativeWallet/components/NativeCreate'
 import { NativeImport } from './NativeWallet/components/NativeImport'
@@ -63,6 +67,15 @@ export const SUPPORTED_WALLETS: Record<KeyManager, SupportedWalletInfo> = {
       { path: '/metamask/connect', component: MetaMaskConnect },
       { path: '/metamask/success', component: MetaMaskSuccess },
       { path: '/metamask/failure', component: MetaMaskFailure }
+    ]
+  }
+  ,
+  [KeyManager.Tally]: {
+    ...TallyConfig,
+    routes: [
+      { path: '/tally/connect', component: TallyConnect },
+      { path: '/tally/success', component: TallySuccess },
+      { path: '/tally/failure', component: TallyFailure }
     ]
   },
   [KeyManager.Portis]: {
